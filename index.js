@@ -40,7 +40,7 @@ app.use(errorHandler);
 app.use(notFoundHandler);
 
 /** ROUTES */
-app.use(`${config.apiVersion}`, require('./routes/index'));
+app.use(config.apiVersion, require('./routes/index'));
 
 /** START SERVER */
 app.listen(app.get('port'), () => {
