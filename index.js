@@ -20,6 +20,9 @@ const app = express();
 /** SETS */
 app.set('port', config.port || 3005);
 
+/** ROUTES */
+app.use(config.apiVersion, require('./routes/index'));
+
 /** MIDDLEWARES */
 //Morgan instance (Dev)
 app.use(morgan('dev'));
@@ -31,16 +34,13 @@ app.use(dbConnectionValidator.testConnection());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Catch 404 error
+app.use(notFoundHandler);
+
 // Error handler middlewares
 app.use(logErrors);
 app.use(wrapErrors);
 app.use(errorHandler);
-
-// Catch 404 error
-app.use(notFoundHandler);
-
-/** ROUTES */
-app.use(config.apiVersion, require('./routes/index'));
 
 /** START SERVER */
 app.listen(app.get('port'), () => {
