@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const config = {
   dev: process.env.NODE_ENV !== 'production',
@@ -8,7 +8,9 @@ const config = {
   dbPassword: process.env.DB_PASSWORD,
   dbHost: process.env.DB_HOST,
   dbName: process.env.DB_NAME,
+  dbDialect: process.env.DB_DIALECT,
   authJwtSecret: process.env.AUTH_JWT_SECRET,
-}
+  apiVersion: process.env.API_VERSION
+};
 
-module.exports = { config }
+module.exports = { config };

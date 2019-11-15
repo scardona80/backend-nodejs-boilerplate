@@ -1,36 +1,48 @@
-const express = require('express')
-const app = express()
+/** REQUIRED PROD DEPENDENCIES */
+const express = require('express');
 
-const { config } = require('./config/index')
+/** REQUIRED DEV DEPENDENCIES */
+const morgan = require('morgan');
 
-const authApi = require('./routes/auth')
-const moviesApi = require('./routes/movies')
-const userMoviesApi = require('./routes/userMovies')
-
-const { 
+/** REQUIRED PROYECT FILES */
+const { config } = require('./config/index');
+const {
   logErrors,
   wrapErrors,
   errorHandler
-} = require('./utils/middlewares/errorHandlers')
+} = require('./utils/middlewares/errorHandlers');
+const notFoundHandler = require('./utils/middlewares/notFoundHandler');
+const dbConnectionValidator = require('./utils/middlewares/sequelizeValidateConnection');
 
-const notFoundHandler = require('./utils/middlewares/notFoundHandler')
+/** INITS */
+const app = express();
 
-// Body parser
-app.use(express.json())
+/** SETS */
+app.set('port', config.port || 3005);
 
-// Routes
-authApi(app)
-moviesApi(app)
-userMoviesApi(app)
+/** MIDDLEWARES */
+//Morgan instance (Dev)
+app.use(morgan('dev'));
+
+//Sequelize database connection validator
+app.use(dbConnectionValidator.testConnection());
+
+//Body parser configurations
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Error handler middlewares
+app.use(logErrors);
+app.use(wrapErrors);
+app.use(errorHandler);
 
 // Catch 404 error
-app.use(notFoundHandler)
+app.use(notFoundHandler);
 
-// Error middlewares
-app.use(logErrors)
-app.use(wrapErrors)
-app.use(errorHandler)
+/** ROUTES */
+app.use(config.apiVersion, require('./routes/index'));
 
-app.listen(config.port, () => {
-  console.log(`Listening on port http://localhost:${config.port}`)
-})
+/** START SERVER */
+app.listen(app.get('port'), () => {
+  console.log(`Listening on port http://localhost:`, app.get('port'));
+});
