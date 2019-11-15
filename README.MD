@@ -20,7 +20,8 @@ Some conventions are established, which seek to work general aspects in a homoge
 <li>Implement the project with the use of eslint and prettier tools.</li>
 </ul>
 <h3>File Structure</h3>
-<p>
+## Estructura del proyecto
+```
 ├── config
 │    └── index.js
 ├── lib
@@ -58,7 +59,7 @@ Some conventions are established, which seek to work general aspects in a homoge
 ├── package-lock.json
 ├── package.json
 └── index.js
-</p>
+```
 <ul>
 <li><b>config</b>(directory): Contains all the configuration files which have ENV variables, database configuration options, API Key Token, default passwords, etc.</li>
 <li><b>routes</b>(directory): Contains all the routes files for every service. Each route file have the different endpoints belonging to each service as well as the calling for authentication middlewares, data schemas validation middlewares, etc. Also, the request and response object needs to be handled inside the routes files in order to give the response from there. Routes files only calls for services and middlewares.</li>
