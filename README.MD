@@ -92,6 +92,6 @@ nodejs-backend-boilerplate
 
 - **.prettierrc.json(file):** Configuration file will be resolved starting from the location of the file being formatted, and searching up the file tree until a config file is (or isn't) found.
 
-- **index.js(file):**
+- **index.js(file):** Main file which contains the server. Included with the instance of the server, callings to middlewares, callings for routes, callings for errors handlers middlewares, etc.
 
 - **package.json(file):** Lists of the packages that the project depends on. Specifies versions of a package that your project can use using semantic versioning rules. makes your build reproducible, and therefore easier to share with other developers.
