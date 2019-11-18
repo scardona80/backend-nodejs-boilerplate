@@ -28,6 +28,7 @@ nodejs-backend-boilerplate
 ├── lib
 │    └── anyLibrary.js
 ├── routes
+│    ├── index.js
 │    ├── someServiceRoutes.js
 │    └── someOtherServiceRoutes.js
 ├── services
@@ -66,7 +67,7 @@ nodejs-backend-boilerplate
 
 - **routes(directory):** Contains all the routes files for every service. Each route file have the different endpoints belonging to each service as well as the calling for authentication middlewares, data schemas validation middlewares, etc. Also, the request and response object needs to be handled inside the routes files in order to give the response from there. Routes files only calls for services and middlewares.
 
-- **models(directory):**
+- **models(directory):** Contains a model file for each entity of the database. Usually the definition of the model is made by an ORM such as mongoose for NoSQL databases or sequelize for SQL databases.
 
 - **services(directory):** Contains the service file for each service as well. Services files contains all the logic of the business and each service shall has its own independent file.
 
